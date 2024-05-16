@@ -6,6 +6,8 @@ import com.sparta.scheduler.entity.Scheduler;
 import com.sparta.scheduler.repository.SchedulerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SchedulerService {
 
@@ -26,5 +28,10 @@ public class SchedulerService {
         SchedulerResponseDto ResponseDto = new SchedulerResponseDto(saveScheduler);
 
         return ResponseDto;
+    }
+
+    public SchedulerResponseDto getSchedulersByTitle(Long id) {
+        Scheduler scheduler = schedulerRepository.findById(id).orElseThrow(NullPointerException::new);
+        return new SchedulerResponseDto(scheduler);
     }
 }

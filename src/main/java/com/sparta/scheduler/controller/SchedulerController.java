@@ -3,10 +3,7 @@ package com.sparta.scheduler.controller;
 import com.sparta.scheduler.dto.SchedulerRequestDto;
 import com.sparta.scheduler.dto.SchedulerResponseDto;
 import com.sparta.scheduler.service.SchedulerService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -21,6 +18,13 @@ public class SchedulerController {
     public SchedulerResponseDto createScheduler(@RequestBody SchedulerRequestDto requestDto) {
 
         return schedulerService.createScheduler(requestDto);
+
+    }
+
+    @GetMapping("/schedulers")
+    public SchedulerResponseDto getSchedulersByTitle(@RequestParam Long id) {
+
+        return schedulerService.getSchedulersByTitle(id);
 
     }
 
