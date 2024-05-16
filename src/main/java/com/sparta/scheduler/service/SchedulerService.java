@@ -47,7 +47,7 @@ public class SchedulerService {
         // 해당 메모가 DB에 존재하는지 확인
         Scheduler scheduler = findScheduler(id);
 
-        if(scheduler.getPassword().equals(requestDto.getPassword())) {
+        if (scheduler.getPassword().equals(requestDto.getPassword())) {
             // memo 내용 수정
             scheduler.update(requestDto);
 
@@ -58,15 +58,23 @@ public class SchedulerService {
         return new SchedulerResponseDto(scheduler);
     }
 
+    public Long deleteScheduler(Long id, String password) {
+        // 해당 메모가 DB에 존재하는지 확인
+        Scheduler scheduler = findScheduler(id);
 
+        if (password.equals(scheduler.getPassword())) {
+            // memo 삭제
+            schedulerRepository.delete(scheduler);
 
+        } else {
+            throw new IllegalArgumentException("삭제 요청한 일정의 비밀번호가 일치하지 않습니다.");
+        }
 
-
-
-
+        return id;
+    }
 
     private Scheduler findScheduler(Long id) {
-        return schedulerRepository.findById(id).orElseThrow(()->
+        return schedulerRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("선택한 일정은 존재하지 않습니다."));
     }
 
