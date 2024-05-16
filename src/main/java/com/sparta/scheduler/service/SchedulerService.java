@@ -30,8 +30,14 @@ public class SchedulerService {
         return ResponseDto;
     }
 
-    public SchedulerResponseDto getSchedulersByTitle(Long id) {
+    public SchedulerResponseDto getSchedulersById(Long id) {
         Scheduler scheduler = schedulerRepository.findById(id).orElseThrow(NullPointerException::new);
         return new SchedulerResponseDto(scheduler);
+    }
+
+    public List<SchedulerResponseDto> getScheduler() {
+        // DB 조회
+        return schedulerRepository.findAllByOrderByCreatedAtDesc().stream().map(SchedulerResponseDto::new).toList();
+
     }
 }

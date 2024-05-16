@@ -3,7 +3,7 @@ package com.sparta.scheduler.dto;
 import com.sparta.scheduler.entity.Scheduler;
 import lombok.Getter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 public class SchedulerResponseDto {
@@ -11,7 +11,7 @@ public class SchedulerResponseDto {
     private String title;
     private String contents;
     private String username;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     public SchedulerResponseDto(Scheduler scheduler) {
         this.id = scheduler.getId();
