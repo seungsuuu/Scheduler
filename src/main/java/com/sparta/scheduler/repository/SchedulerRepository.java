@@ -9,5 +9,4 @@ import java.util.Optional;
 
 public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
     List<Scheduler> findAllByOrderByCreatedAtDesc();
-    Optional<Scheduler> findById(Long id);
 }

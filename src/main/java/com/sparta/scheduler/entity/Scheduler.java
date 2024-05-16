@@ -35,11 +35,11 @@ public class Scheduler extends Timestamped {
         this.password = requestDto.getPassword();
     }
 
-//    public void update(SchedulerRequestDto requestDto) {
-//        this.title = requestDto.getTitle();
-//        this.contents = requestDto.getContents();
-//        this.username = requestDto.getUsername();
-//        this.password = requestDto.getPassword();
-//    }
+    public void update(SchedulerRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.contents = requestDto.getContents();
+        this.username = requestDto.getUsername();
+        this.password = requestDto.getPassword();
+    }
 
 }

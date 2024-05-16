@@ -5,6 +5,7 @@ import com.sparta.scheduler.dto.SchedulerResponseDto;
 import com.sparta.scheduler.entity.Scheduler;
 import com.sparta.scheduler.repository.SchedulerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class SchedulerService {
     }
 
     public SchedulerResponseDto getSchedulersById(Long id) {
-        Scheduler scheduler = schedulerRepository.findById(id).orElseThrow(NullPointerException::new);
+        Scheduler scheduler = findScheduler(id);
         return new SchedulerResponseDto(scheduler);
     }
 
@@ -40,4 +41,33 @@ public class SchedulerService {
         return schedulerRepository.findAllByOrderByCreatedAtDesc().stream().map(SchedulerResponseDto::new).toList();
 
     }
+
+    @Transactional
+    public SchedulerResponseDto updateScheduler(Long id, SchedulerRequestDto requestDto) {
+        // 해당 메모가 DB에 존재하는지 확인
+        Scheduler scheduler = findScheduler(id);
+
+        if(scheduler.getPassword().equals(requestDto.getPassword())) {
+            // memo 내용 수정
+            scheduler.update(requestDto);
+
+        } else {
+            throw new IllegalArgumentException("수정 요청한 일정의 비밀번호가 일치하지 않습니다.");
+        }
+
+        return new SchedulerResponseDto(scheduler);
+    }
+
+
+
+
+
+
+
+
+    private Scheduler findScheduler(Long id) {
+        return schedulerRepository.findById(id).orElseThrow(()->
+                new IllegalArgumentException("선택한 일정은 존재하지 않습니다."));
+    }
+
 }

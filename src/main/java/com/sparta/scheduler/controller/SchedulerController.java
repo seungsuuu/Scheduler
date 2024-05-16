@@ -37,4 +37,11 @@ public class SchedulerController {
 
     }
 
+    @PutMapping("/schedulers/{id}")
+    public SchedulerResponseDto updateScheduler(@PathVariable Long id, @RequestBody SchedulerRequestDto requestDto) {
+
+        return schedulerService.updateScheduler(id, requestDto);
+
+    }
+
 }
