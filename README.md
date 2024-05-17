@@ -1,10 +1,10 @@
 # 일정 관리 앱 서버 만들기
 
 1. Use Case 다이어그램
-   https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpKTSk%2FbtsHsyUGMZy%2FGtpj49Tyn6dSJDnEyHAMI0%2Fimg.png
+   ![scheduler use case 다이어그램](https://github.com/seungsuuu/Scheduler/assets/48900537/79e18f6b-6726-4562-92c3-b7970b4b2764)
 
 2. ER 다이어그램
-   https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbm6jhF%2FbtsHsIpjfKM%2FP2kS8xuvoB4Na3hQTbPMxK%2Fimg.png
+   ![scheduler ER 다이어그램](https://github.com/seungsuuu/Scheduler/assets/48900537/cdb69f24-dfaa-4dab-9fc6-4c0317ef6cfa)
 
 3. API 명세서
-   https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdaoxbJ%2FbtsHqyvgqf2%2F79KtqiUc9kckBTtcMQOVdK%2Fimg.png
+   ![scheduler API 명세서](https://github.com/seungsuuu/Scheduler/assets/48900537/63db00cb-21b7-4874-9deb-ca2cc40a15ee)
