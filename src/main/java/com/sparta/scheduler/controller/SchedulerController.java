@@ -24,16 +24,16 @@ public class SchedulerController {
     }
 
     @GetMapping("/schedulers/select")
-    public SchedulerResponseDto getSchedulersById(@RequestParam Long id) {
+    public SchedulerResponseDto getSchedulerById(@RequestParam Long id) {
 
-        return schedulerService.getSchedulersById(id);
+        return schedulerService.getSchedulerById(id);
 
     }
 
     @GetMapping("/schedulers/all")
-    public List<SchedulerResponseDto> getScheduler() {
+    public List<SchedulerResponseDto> getSchedulers() {
 
-        return schedulerService.getScheduler();
+        return schedulerService.getSchedulers();
 
     }
 

@@ -31,15 +31,16 @@ public class SchedulerService {
         return ResponseDto;
     }
 
-    public SchedulerResponseDto getSchedulersById(Long id) {
+    public SchedulerResponseDto getSchedulerById(Long id) {
+        // 해당 메모가 DB에 존재하는지 확인
         Scheduler scheduler = findScheduler(id);
+
         return new SchedulerResponseDto(scheduler);
     }
 
-    public List<SchedulerResponseDto> getScheduler() {
+    public List<SchedulerResponseDto> getSchedulers() {
         // DB 조회
         return schedulerRepository.findAllByOrderByCreatedAtDesc().stream().map(SchedulerResponseDto::new).toList();
-
     }
 
     @Transactional
@@ -47,6 +48,7 @@ public class SchedulerService {
         // 해당 메모가 DB에 존재하는지 확인
         Scheduler scheduler = findScheduler(id);
 
+        // 비밀번호 일치 확인
         if (scheduler.getPassword().equals(requestDto.getPassword())) {
             // memo 내용 수정
             scheduler.update(requestDto);
@@ -62,6 +64,7 @@ public class SchedulerService {
         // 해당 메모가 DB에 존재하는지 확인
         Scheduler scheduler = findScheduler(id);
 
+        // 비밀번호 일치 확인
         if (password.equals(scheduler.getPassword())) {
             // memo 삭제
             schedulerRepository.delete(scheduler);
