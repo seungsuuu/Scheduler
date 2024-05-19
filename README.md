@@ -12,7 +12,7 @@
 
 ### API 명세서
    
-   ![scheduler API 명세서](https://github.com/seungsuuu/Scheduler/assets/48900537/63db00cb-21b7-4874-9deb-ca2cc40a15ee)
+   ![scheduler API 명세서(수정)](https://github.com/seungsuuu/Scheduler/assets/48900537/fa445984-64d4-413b-b37d-d52361c689ac)
 
 
 ### 요구 사항
