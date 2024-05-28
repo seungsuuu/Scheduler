@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +30,9 @@ public class Scheduler extends Timestamped {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "scheduler")
+    private List<Coment> comentList = new ArrayList<>();
 
     public Scheduler(SchedulerRequestDto requestDto) {
         this.title = requestDto.getTitle();
