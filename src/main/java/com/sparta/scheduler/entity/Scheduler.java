@@ -48,4 +48,9 @@ public class Scheduler extends Timestamped {
         this.password = requestDto.getPassword();
     }
 
+    public void addCommentList(Comment comment) {
+        commentList.add(comment);
+        comment.setScheduler(this); // 외래 키 설정
+    }
+
 }
