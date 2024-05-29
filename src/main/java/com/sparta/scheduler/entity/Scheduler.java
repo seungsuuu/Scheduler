@@ -32,7 +32,7 @@ public class Scheduler extends Timestamped {
     private String password;
 
     @OneToMany(mappedBy = "scheduler")
-    private List<Coment> comentList = new ArrayList<>();
+    private List<Comment> commentList = new ArrayList<>();
 
     public Scheduler(SchedulerRequestDto requestDto) {
         this.title = requestDto.getTitle();
