@@ -94,4 +94,31 @@ public class CommentService {
 
         return responseDto;
     }
+
+    public void deleteComment(Long schedulerId, Long commentId, Long userId) {
+
+        if (schedulerId == null || schedulerId < 0) {
+            throw new IllegalArgumentException("일정 ID가 입력되지 않았습니다.");
+        }
+
+        if (commentId == null || commentId < 0) {
+            throw new IllegalArgumentException("댓글 ID가 입력되지 않았습니다.");
+        }
+
+        Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
+                () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
+        );
+
+        Comment comment = commentRepository.findByIdAndScheduler_Id(commentId, scheduler.getId()).orElseThrow(
+                () -> new IllegalArgumentException("입력한 댓글 ID에 해당하는 일정은 존재하지 않습니다.")
+        );
+
+        if (comment.getUserId().equals(userId)) {
+
+            commentRepository.delete(comment);
+
+        } else {
+            throw new IllegalArgumentException("작성자 ID가 일치하지 않습니다.");
+        }
+    }
 }

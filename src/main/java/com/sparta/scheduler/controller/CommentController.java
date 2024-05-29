@@ -3,6 +3,8 @@ package com.sparta.scheduler.controller;
 import com.sparta.scheduler.dto.CommentRequestDto;
 import com.sparta.scheduler.dto.CommentResponseDto;
 import com.sparta.scheduler.service.CommentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +35,13 @@ public class CommentController {
     public CommentResponseDto updateComment(@PathVariable Long schedulerId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
 
         return commentService.updateComment(schedulerId, commentId, requestDto);
+    }
+
+    @DeleteMapping("/schedulers/{schedulerId}/comments/{commentId}")
+    public ResponseEntity<String> deleteComment(@PathVariable Long schedulerId, @PathVariable Long commentId, @RequestHeader Long userId) {
+
+        commentService.deleteComment(schedulerId, commentId, userId);
+        return new ResponseEntity<>("선택한 댓글이 삭제 완료되었습니다.", HttpStatus.OK);
     }
 
 }
