@@ -1,9 +1,12 @@
 package com.sparta.scheduler.service;
 
+import com.sparta.scheduler.dto.LoginRequestDto;
 import com.sparta.scheduler.dto.SignupRequestDto;
 import com.sparta.scheduler.entity.User;
 import com.sparta.scheduler.entity.UserRoleEnum;
+import com.sparta.scheduler.jwt.JwtUtil;
 import com.sparta.scheduler.repository.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,9 +18,11 @@ public class UserService {
     private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
 
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
     }
 
     public void signup(SignupRequestDto requestDto) {
@@ -42,5 +47,21 @@ public class UserService {
         // 사용자 등록
         User user = new User(username, password, nickname, role);
         userRepository.save(user);
+    }
+
+    public void login(LoginRequestDto requestDto, HttpServletResponse res) {
+        String username = requestDto.getUsername();
+        String password = requestDto.getPassword();
+
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new IllegalArgumentException("입력한 ID가 틀렸거나, 존재하지 않습니다.")
+        );
+
+        if(user.getPassword().equals(password)) {
+
+            String token = jwtUtil.createToken(user.getUsername(), user.getRole());
+
+            res.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+        }
     }
 }

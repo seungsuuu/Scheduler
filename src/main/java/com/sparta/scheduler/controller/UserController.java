@@ -1,5 +1,6 @@
 package com.sparta.scheduler.controller;
 
+import com.sparta.scheduler.dto.LoginRequestDto;
 import com.sparta.scheduler.dto.SignupRequestDto;
 import com.sparta.scheduler.entity.UserRoleEnum;
 import com.sparta.scheduler.jwt.JwtUtil;
@@ -32,6 +33,13 @@ public class UserController {
         return new ResponseEntity<>("회원 가입이 완료되었습니다.", HttpStatus.valueOf(200));
     }
 
+    @PostMapping("/users/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequestDto requestDto, HttpServletResponse res) {
+
+        userService.login(requestDto, res);
+
+        return new ResponseEntity<>("로그인이 완료되었습니다.", HttpStatus.valueOf(200));
+    }
 
     // JWT 생성 및 저장
     @GetMapping("/create-jwt")
