@@ -25,54 +25,31 @@ public class CommentService {
 
     public CommentResponseDto createComment(Long schedulerId, CommentRequestDto requestDto) {
 
-        if (schedulerId == null || schedulerId < 0) {
-            throw new IllegalArgumentException("일정 ID가 입력되지 않았습니다.");
-        }
-
-        if (requestDto.getContents().isEmpty()) {
-            throw new IllegalArgumentException("댓글 내용이 입력되지 않았습니다.");
-        }
-
         Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
                 () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
         );
 
         Comment comment = new Comment(requestDto);
-
         scheduler.addCommentList(comment);
 
         Comment saveComment = commentRepository.save(comment);
 
         CommentResponseDto responseDto = new CommentResponseDto(saveComment);
-
         return responseDto;
     }
 
     public List<CommentResponseDto> getComments(Long schedulerId) {
-
-        if (schedulerId == null || schedulerId < 0) {
-            throw new IllegalArgumentException("일정 ID가 입력되지 않았습니다.");
-        }
 
         Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
                 () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
         );
 
         List<CommentResponseDto> responseDtos = scheduler.getCommentList().stream().map(CommentResponseDto::new).toList();
-
         return responseDtos;
     }
 
     @Transactional
     public CommentResponseDto updateComment(Long schedulerId, Long commentId, CommentRequestDto requestDto) {
-
-        if (schedulerId == null || schedulerId < 0) {
-            throw new IllegalArgumentException("일정 ID가 입력되지 않았습니다.");
-        }
-
-        if (commentId == null || commentId < 0) {
-            throw new IllegalArgumentException("댓글 ID가 입력되지 않았습니다.");
-        }
 
         Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
                 () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
@@ -91,19 +68,10 @@ public class CommentService {
         }
 
         CommentResponseDto responseDto = new CommentResponseDto(comment);
-
         return responseDto;
     }
 
     public void deleteComment(Long schedulerId, Long commentId, Long userId) {
-
-        if (schedulerId == null || schedulerId < 0) {
-            throw new IllegalArgumentException("일정 ID가 입력되지 않았습니다.");
-        }
-
-        if (commentId == null || commentId < 0) {
-            throw new IllegalArgumentException("댓글 ID가 입력되지 않았습니다.");
-        }
 
         Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
                 () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
