@@ -1,23 +1,37 @@
 package com.sparta.scheduler.controller;
 
+import com.sparta.scheduler.dto.SignupRequestDto;
 import com.sparta.scheduler.entity.UserRoleEnum;
 import com.sparta.scheduler.jwt.JwtUtil;
+import com.sparta.scheduler.service.UserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
 
     private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-    public UserController(JwtUtil jwtUtil) {
+    public UserController(JwtUtil jwtUtil, UserService userService) {
         this.jwtUtil = jwtUtil;
+        this.userService = userService;
     }
+
+    @PostMapping("/users/signup")
+    public ResponseEntity<String> signup(@Valid @RequestBody SignupRequestDto requestDto) {
+
+        userService.signup(requestDto);
+
+        return new ResponseEntity<>("회원 가입이 완료되었습니다.", HttpStatus.valueOf(200));
+    }
+
 
     // JWT 생성 및 저장
     @GetMapping("/create-jwt")
@@ -53,6 +67,4 @@ public class UserController {
 
         return "getJwt : " + username + ", " + authority;
     }
-
-
 }
