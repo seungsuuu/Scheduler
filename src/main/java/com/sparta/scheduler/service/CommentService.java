@@ -23,13 +23,14 @@ public class CommentService {
     }
 
 
-    public CommentResponseDto createComment(Long schedulerId, CommentRequestDto requestDto) {
+    public CommentResponseDto createComment(Long schedulerId, CommentRequestDto requestDto, Long userId) {
 
         Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
                 () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
         );
 
         Comment comment = new Comment(requestDto);
+        comment.setUserId(userId);
         scheduler.addCommentList(comment);
 
         Comment saveComment = commentRepository.save(comment);
@@ -49,7 +50,7 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentResponseDto updateComment(Long schedulerId, Long commentId, CommentRequestDto requestDto) {
+    public CommentResponseDto updateComment(Long schedulerId, Long commentId, CommentRequestDto requestDto, Long userId) {
 
         Scheduler scheduler = schedulerRepository.findById(schedulerId).orElseThrow(
                 () -> new IllegalArgumentException("입력한 일정 ID에 해당하는 일정은 존재하지 않습니다.")
@@ -59,7 +60,7 @@ public class CommentService {
                 () -> new IllegalArgumentException("입력한 댓글 ID에 해당하는 일정은 존재하지 않습니다.")
         );
 
-        if (comment.getUserId().equals(requestDto.getUserId())) {
+        if (comment.getUserId().equals(userId)) {
 
             comment.update(requestDto);
 
