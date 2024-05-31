@@ -57,7 +57,7 @@
 
 ### API 명세서
 
-   ![scheduler API 명세서 ver2](https://github.com/seungsuuu/Scheduler/assets/48900537/c210b70e-e09b-48c3-96ab-d5a447bb94c9)
+   ![scheduler API 명세서 ver2](https://github.com/seungsuuu/Scheduler/assets/48900537/e5f4149c-cf07-45f2-8e18-2ddccc8830c5)
 
 
 ### 요구 사항
@@ -107,7 +107,7 @@
       - 선택한 댓글의 사용자가 현재 사용자와 일치하지 않은 경우
 
 
-4. (5)  5~7 단계에 적용될 공통 조건
+4.5 5~7 단계에 적용될 공통 조건
 
    - `Ver 1` 일정 기능을 구현하면서 나온 예외처리를 Validation 어노테이션을 활용하여 수정
    - 2~4 단계에서 구현한 예외처리를 Validation 어노테이션을 활용하여 수정
