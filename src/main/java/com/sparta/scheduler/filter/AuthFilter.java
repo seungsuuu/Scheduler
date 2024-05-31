@@ -34,7 +34,7 @@ public class AuthFilter implements Filter {
         String url = httpServletRequest.getRequestURI();
 
         if (StringUtils.hasText(url) && url.startsWith("/api/user")) {
-            log.info("인증처리를 하지 않는 URL : "+ url);
+            log.info("인증처리를 하지 않는 URL : " + url);
             // 회원가입, 로그인 관련 API 는 인증 필요없이 요청 진행
             chain.doFilter(request, response); // 다음 Filter 로 이동
         } else {
@@ -45,7 +45,7 @@ public class AuthFilter implements Filter {
             if (StringUtils.hasText(token)) { // 토큰이 존재하면 검증 시작
 
                 // 토큰 검증
-                if (!jwtUtil.validateToken(token)){
+                if (!jwtUtil.validateToken(token)) {
                     throw new IllegalArgumentException("Token Error");
                 }
 

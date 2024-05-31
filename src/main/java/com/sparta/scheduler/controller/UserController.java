@@ -60,7 +60,7 @@ public class UserController {
         String token = jwtUtil.getJwtFromHeader(request);
 
         // 토큰 검증
-        if(!jwtUtil.validateToken(token)){
+        if (!jwtUtil.validateToken(token)) {
             throw new IllegalArgumentException("Token Error");
         }
 

@@ -57,7 +57,7 @@ public class UserService {
                 () -> new IllegalArgumentException("입력한 ID가 틀렸거나, 존재하지 않습니다.")
         );
 
-        if(user.getPassword().equals(password)) {
+        if (user.getPassword().equals(password)) {
 
             String token = jwtUtil.createToken(user.getUsername(), user.getRole());
 
