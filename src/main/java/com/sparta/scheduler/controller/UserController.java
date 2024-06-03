@@ -2,7 +2,7 @@ package com.sparta.scheduler.controller;
 
 import com.sparta.scheduler.dto.LoginRequestDto;
 import com.sparta.scheduler.dto.SignupRequestDto;
-import com.sparta.scheduler.entity.UserRoleEnum;
+import com.sparta.scheduler.entity.UserRole;
 import com.sparta.scheduler.jwt.JwtUtil;
 import com.sparta.scheduler.service.UserService;
 import io.jsonwebtoken.Claims;
@@ -45,7 +45,7 @@ public class UserController {
     @GetMapping("/create-jwt")
     public String createJwt(HttpServletResponse res) {
         // Jwt 생성
-        String token = jwtUtil.createToken("Robbie", UserRoleEnum.USER);
+        String token = jwtUtil.createToken("Robbie", UserRole.USER);
 
         // Jwt 쿠키 저장
         res.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);

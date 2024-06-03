@@ -24,9 +24,9 @@ public class User extends Timestamped {
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum role;
+    private UserRole role;
 
-    public User(String username, String password, String nickname, UserRoleEnum role) {
+    public User(String username, String password, String nickname, UserRole role) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;

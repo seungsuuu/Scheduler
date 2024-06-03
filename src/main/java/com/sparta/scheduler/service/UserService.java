@@ -3,7 +3,7 @@ package com.sparta.scheduler.service;
 import com.sparta.scheduler.dto.LoginRequestDto;
 import com.sparta.scheduler.dto.SignupRequestDto;
 import com.sparta.scheduler.entity.User;
-import com.sparta.scheduler.entity.UserRoleEnum;
+import com.sparta.scheduler.entity.UserRole;
 import com.sparta.scheduler.jwt.JwtUtil;
 import com.sparta.scheduler.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
@@ -36,12 +36,12 @@ public class UserService {
         }
 
         // 사용자 ROLE 확인
-        UserRoleEnum role = UserRoleEnum.USER;
+        UserRole role = UserRole.USER;
         if (requestDto.isAdmin()) {
             if (!ADMIN_TOKEN.equals(requestDto.getAdminToken())) {
                 throw new IllegalArgumentException("관리자 암호가 틀려 등록이 불가능합니다.");
             }
-            role = UserRoleEnum.ADMIN;
+            role = UserRole.ADMIN;
         }
 
         // 사용자 등록
